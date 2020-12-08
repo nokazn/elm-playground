@@ -9,7 +9,7 @@ import Html.Events exposing (..)
 main : Program () Model Msg
 main =
     Browser.sandbox
-        { init = { message = "" }
+        { init = init
         , update = update
         , view = view
         }
@@ -20,8 +20,12 @@ main =
 
 
 type alias Model =
-    { message : String
-    }
+    String
+
+
+init : () -> (Model -> Cmd Msg)
+init _ =
+    ( "", Cmd.none )
 
 
 
@@ -37,10 +41,10 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         SayHello greeted ->
-            { model | message = "こんにちは" ++ greeted }
+            "こんにちは" ++ greeted
 
         SayBye ->
-            { model | message = "さようなら" }
+            "さようなら"
 
 
 
